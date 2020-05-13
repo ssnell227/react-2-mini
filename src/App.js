@@ -8,26 +8,36 @@ import FamilyChanger from './components/FamilyChanger';
 import TextContainer from './components/TextContainer';
 
 class App extends Component {
-  // constructor
+  constructor (props) {
+    super(props)
 
-  // updateColor
+    this.state = {
+      fontColor: 'black',
+      fontSize: 12,
+      fontFamily: 'monospace',
+      allowEdit: 'true'
+    }
+  }
 
-  // updateSize
-
-  // updateFamily
-
-  // updateEditStatus
+  updateValue = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+    console.log(this.state)
+  }
 
   render() {
     return (
       <div>
         <div className="headerBar">
-          {/* Render EditToggle */}
-          {/* Render ColorChanger */}
-          {/* Render SizeChanger */}
-          {/* Render FamilyChanger */}
+          <EditToggle  update={this.updateValue}/>
+          <ColorChanger allowEdit={this.state.allowEdit} update={this.updateValue}/>
+          <SizeChanger allowEdit={this.state.allowEdit} update={this.updateValue}/>
+          <FamilyChanger allowEdit={this.state.allowEdit} update={this.updateValue}/>
         </div>
-        <div className="textArea">{/* Render TextContainer */}</div>
+        <div  className="textArea">
+          <TextContainer allowEdit={this.state.allowEdit} styles={this.state}/>
+        </div>
       </div>
     );
   }
